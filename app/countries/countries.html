@@ -1,0 +1,32 @@
+<div id="table-wrapper">
+	<div  id="table-scroll"  class="row center-xs">
+		<table >
+			<thead>
+				<tr>
+					<td>Name</td>
+					<td>Country Code</td>
+					<td>Capital</td>
+					<td>Area in KM^2</td>
+					<td>Population</td>
+					<td>Continent</td>
+
+				</tr>
+			</thead>
+			<tbody>	
+				<tr ng-repeat="country in response">
+					<td><a ng-href='/app/#/countries/{{country.countryCode}}'>{{country.countryName}}</a></td>
+					<td>{{ country.countryCode }}</td>
+					<td>{{ country.capital }}</td>
+					<td>{{ country.areaInSqKm | number:0 }}</td>
+					<td>{{ country.population | number:0 }}</td>
+					<td>{{ country.continentName }}</td>
+
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="row center-xs">
+		<a href="./#/" class="button">Home</a>
+	</div>
+</div>
+

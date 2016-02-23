@@ -14,7 +14,7 @@
 			</thead>
 			<tbody>	
 				<tr ng-repeat="country in response">
-					<td><a ng-href='country/app/#/countries/{{country.countryCode}}'>{{country.countryName}}</a></td>
+					<td><a ng-href='app/#/countries/{{country.countryCode}}'>{{country.countryName}}</a></td>
 					<td>{{ country.countryCode }}</td>
 					<td>{{ country.capital }}</td>
 					<td>{{ country.areaInSqKm | number:0 }}</td>

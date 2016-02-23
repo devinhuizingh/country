@@ -1,4 +1,4 @@
-angular.module('myApp', ['ngRoute'])
+angular.module('myApp', ['ngRoute','ngAnimate'])
 	.config(['$routeProvider', function($routeProvider){
         
         $routeProvider
@@ -41,6 +41,19 @@ angular.module('myApp', ['ngRoute'])
             return $http.get('http://api.geonames.org/neighboursJSON?country='+$route.current.params.countryCode+'&username=huizingh');
 
         };
+    })
+    .run(function($rootScope, $location, $timeout) {
+    $rootScope.$on('$routeChangeError', function() {
+        $location.path("/error");
+    });
+    $rootScope.$on('$routeChangeStart', function() {
+        $rootScope.isLoading = true;
+    });
+    $rootScope.$on('$routeChangeSuccess', function() {
+      $timeout(function() {
+        $rootScope.isLoading = false;
+      }, 1000);
+    });
     })
     
     

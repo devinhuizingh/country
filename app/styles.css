@@ -64,6 +64,10 @@ thead, .bold{
 h1 {
   font-size: 3em;
   font-weight: bolder;
+  -webkit-animation: rollIn .5s;
+    -moz-animation: rollIn .5s;
+    -ms-animation: rollIn .5s;
+    animation: rollIn .5s;
 }
 
 body {
@@ -82,3 +86,33 @@ a {
 table {
   opacity: .8
 }
+
+table .ng-enter {  
+    -webkit-animation: zoomIn .5s;
+    -moz-animation: zoomIn .5s;
+    -ms-animation: zoomIn .5s;
+    animation: zoomIn .5s;
+}
+table .ng-leave {  
+    -webkit-animation: zoomOutDown .5s;
+    -moz-animation: zoomOutDown .5s;
+    -ms-animation: zoomOutDown .5s;
+    animation: zoomOutDown .5s;
+}
+
+.loading {
+  position:relative;
+  height:100%;
+}
+.loading:before {
+  position:absolute;
+  content:"";
+  left:0;
+  bottom:0;
+  right:0;
+  top:0;
+  z-index:1000;
+  background: no-repeat center center;
+  background-image: url('./loading-animation.gif');
+}
+

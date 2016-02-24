@@ -31,38 +31,22 @@
    background: #1b435e;
    }
 
-#table-wrapper {
-  position:relative;
-}
-#table-scroll {
+.container {
   height:350px;
   overflow:auto;  
   margin-top:20px;
-}
-#table-wrapper table {
-  width:90%;
-
-}
-#table-wrapper table * {
-  background:lightgrey;
-  color:black;
-}
-#table-wrapper table thead th .text {
-  position:absolute;   
-  top:-20px;
-  z-index:2;
-  height:20px;
-  width:35%;
-  border:1px solid red;
+  background-color: rgba(192,192,192,.4)
 }
 
-thead, .bold{
-  font-size: 1.8em;
-  font-weight: bolder
+
+
+.header1 {
+  font-size: 1.5em;
+  font-weight: bolder;
 }
 
 h1 {
-  font-size: 3em;
+  
   font-weight: bolder;
   -webkit-animation: rollIn .5s;
     -moz-animation: rollIn .5s;
@@ -72,28 +56,17 @@ h1 {
 
 body {
   background:url(sunset.jpg) no-repeat fixed center;
+  background-size: cover;
 
   }
 
-
-p, td {
-  font-size: 1.3em;
-}
-a {
-  font-size: 1.2em;
-}
-
-table {
-  opacity: .8
-}
-
-table .ng-enter {  
+.container .ng-enter {  
     -webkit-animation: zoomIn .5s;
     -moz-animation: zoomIn .5s;
     -ms-animation: zoomIn .5s;
     animation: zoomIn .5s;
 }
-table .ng-leave {  
+.container .ng-leave {  
     -webkit-animation: zoomOutDown .5s;
     -moz-animation: zoomOutDown .5s;
     -ms-animation: zoomOutDown .5s;

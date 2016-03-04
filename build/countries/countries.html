@@ -1,0 +1,52 @@
+<div class="container">
+	
+	<div class="row" ng-if="countries.length>0">
+		
+		<div class="col-xs-2 header1">Name</div>
+		<div class="col-xs-2 header1">Country Code</div>
+		<div class="col-xs-2 header1">Capital</div>
+		<div class="col-xs-2 header1">Area in KM^2</div>
+		<div class="col-xs-2 header1">Population</div>
+		<div class="col-xs-2 header1">Continent</div>
+
+	</div>		
+		
+	
+	<div class="row" ng-repeat="country in countries">
+		<div class="col-xs-2">
+			<div class="cell">
+				<a ng-href='#/countries/{{country.countryCode}}'>{{country.countryName}}</a>
+			</div>
+		</div>	
+		<div class="col-xs-2">
+			<div class="cell">
+				{{country.countryCode}}
+			</div>
+		</div>
+		<div class="col-xs-2">
+			<div class="cell">
+				{{country.capital}}
+			</div>
+		</div>
+		<div class="col-xs-2">
+			<div class="cell">
+				{{ country.areaInSqKm | number:0 }}
+			</div>
+		</div>
+		<div class="col-xs-2">
+			<div class="cell">
+				{{ country.population | number:0 }}
+			</div>
+		</div>
+		<div class="col-xs-2">
+			<div class="cell">
+				{{ country.continentName }}
+			</div>
+		</div>
+
+	</div>
+			
+</div>
+<div class="row center-xs">
+		<a href="./#/" class="button">Home</a>
+	</div>

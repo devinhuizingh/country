@@ -1,0 +1,68 @@
+
+<div class="container2 center-xs">
+	<div class="row center-xs">
+		<h2>
+			{{response2.countryName}}
+		</h2>
+	</div>
+	
+			
+		<div class="row center-xs">
+			<div class="col-xs-3 end-xs">
+				Population of Country:
+			</div>
+
+			<div class="col-xs-3 start-xs">
+				{{ response2.population | number:0 }}
+			</div>
+		</div>
+		<div class="row center-xs">
+			<div class="col-xs-3 end-xs">
+				Area:
+			</div>
+			<div class="col-xs-3 start-xs">
+				{{ response2.areaInSqKm | number:0 }} square kilometers
+			</div>
+		</div>
+		<div class="row center-xs">
+			<div class="col-xs-3 end-xs">
+				Capital:
+			</div>
+			<div class="col-xs-3 start-xs">
+				{{response2.capital}}
+			</div>
+		</div>
+		<div class="row center-xs">
+			<div class="col-xs-3 end-xs">
+				Population of Capital:
+			</div>
+			<div class="col-xs-3 start-xs">
+				{{ response3.population | number:0 }}
+			</div>
+		</div>
+		<div class="row center-xs">
+			<div class="col-xs-3 end-xs">
+				Neighbors:
+			</div>
+			<div class="col-xs-3 start-xs">
+				This country has {{response4.length}} neighbors:
+			</div>
+			
+		</div>
+
+	
+
+
+<div class"countries row center-xs" ng-repeat='neighbor in response4'>
+	<a href="./#/countries/{{neighbor.countryCode}}">{{neighbor.name}}</a>
+</div>
+</div>
+<div class="row center-xs">
+	<img id='flag' class="col-xs-3" height="170" src="http://www.geonames.org/flags/x/{{current | lowercase}}.gif">
+
+	<img id='map' class="col-xs-3" height="170" src="http://www.geonames.org/img/country/250/{{current}}.png" alt="No Map to Display">
+</div>
+</div>
+<div class="row center-xs">
+	<a href="./#/" class="button">Home</a>
+	<a href="./#/countries" class="button">Browse Countries</a>

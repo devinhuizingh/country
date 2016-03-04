@@ -30,6 +30,7 @@ angular.module('myApp', ['ngRoute','ngAnimate'])
 
         };
     })
+
     .factory("getCapital", function($http, $route) {
         return function() {
             return $http.get('http://api.geonames.org/searchJSON?username=huizingh&maxRows=1&q=capital&&country='+ $route.current.params.countryCode);

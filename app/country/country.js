@@ -6,13 +6,14 @@ angular.module('myApp')
         function($scope, getCountry, $route, $routeParams, getCapital, jsonData, getNeighbors) {
             getCountry().then(
                 function(response2){
-                    $scope.response2=response2.data.geonames[0];
-                    //console.log(response2=response2.data.geonames[0])
+                    $scope.response2 =response2.data.geonames;
+                    
                 }
             )
+            
             getCapital().then(
                 function(response3){
-                    $scope.response3=response3.data.geonames[0];
+                    $scope.response3=response3.data.geonames;
                     //console.log(response3.data.geonames[0])
                 }
             )
@@ -24,6 +25,9 @@ angular.module('myApp')
                 }
             )
         $scope.current=$route.current.params.countryCode;
+        //$scope.current="US"
           
         }
     ]);
+
+

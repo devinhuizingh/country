@@ -5,7 +5,7 @@ angular.module('myApp')
         	jsonData().then(
                 function(response){
                     $scope.countries=response.data.geonames;
-                    
+                    $scope.response=response.data.geonames;
                 }
             )
         }

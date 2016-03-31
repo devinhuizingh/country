@@ -91,98 +91,157 @@ describe("getNeighbors", function() {
 describe("myApp", function() {
     beforeEach(module('myApp'));
     describe('countryCntrl', function() {
-        var ctrl, scope, httpBackend, q, rootScope, gC, route;
-        beforeEach(inject(function($controller, $rootScope, $httpBackend, $q, getCountry, $route) {
-            $httpBackend.whenGET('./home/home.html').respond([]);
-
-            $route.current = {
+        var ctrl, scope, getCountryPromise, getCaptialPromise, getNeighborsPromise, deferred, route;
+        beforeEach(inject(function($controller, $rootScope, $q, getCountry, getCapital, getNeighbors, $route) {
+            
+            scope = $rootScope.$new();
+            deferred = $q.defer();
+            route = $route;
+            getCountryPromise = $q.when({
+                      data: {
+                      geonames: ['Washington']
+                      }
+                });
+            getCapitalPromise = $q.when({
+                      data: {
+                      geonames: ['Ontario']
+                      }
+                });
+            getNeighborsPromise = $q.when({
+                      data: {
+                      geonames: ['Mexico']
+                      }
+                });
+            
+            route.current = {
             params: { countryCode: 'US' } 
             };
 
-            scope = $rootScope.$new();
             ctrl = $controller('countryCntrl', {
-                $scope : scope
-            });
+                $scope : scope,
+                getCountry: function()  { return getCountryPromise },
+                getCapital: function()  { return getCapitalPromise },
+                getNeighbors: function()  { return getNeighborsPromise },
+                $route:  route
 
-            httpBackend = $httpBackend;
-            q = $q;
-            rootScope = $rootScope;
-            gC = getCountry;
-            route=$route;
+
+            });
             
-
             
-
-            // react on that request Country
-            httpBackend.whenGET('http://api.geonames.org/countryInfoJSON?username=huizingh&country='+$route.current.params.countryCode).respond({
-                data: {
-                    geonames: ["Washington"]
-                }
-            });
-
-            // expect the actual request Capital
-            httpBackend.expect('GET', 'http://api.geonames.org/searchJSON?username=huizingh&maxRows=1&q=capital&&country='+ $route.current.params.countryCode);
-
-            // react on that request Captial
-            httpBackend.whenGET('http://api.geonames.org/searchJSON?username=huizingh&maxRows=1&q=capital&&country='+ $route.current.params.countryCode).respond({
-                data: {
-                    geonames: ["Washington"]
-                }
-            });
-
-            //expect the actual request Neighbors
-            //httpBackend.expect('GET', 'http://api.geonames.org/searchJSON?username=huizingh&maxRows=1&q=capital&&country='+ $route.current.params.countryCode);
-
-            // react on that request Neighbors
-            httpBackend.whenGET('http://api.geonames.org/neighboursJSON?country='+$route.current.params.countryCode+'&username=huizingh').respond({
-                data: {
-                    geonames: ["Washington"]
-                }
-            });
-
-        }));
-
-
-
-        //it('should have current defined', function() {
-        //    expect(scope.current).toBe("US");
-
-            
-        //});
-
-        it('should call getCountry()', function() {
-        // expect the actual request Country
-            httpBackend.expect('GET', 'http://api.geonames.org/countryInfoJSON?username=huizingh&country='+route.current.params.countryCode);
-        })
+        }));                
+        
 
         it('should have country data', function() {
-            //expect(scope.response2).toBeDefined()
-            var data1;
+              var handler = jasmine.createSpy('success');
+              deferred.promise.then(handler);
+              deferred.resolve();
+              scope.$digest();
+              expect(scope.response2).toBe('Washington');
+              
+             
+        });
+        it('should have country data', function() {
+              var handler = jasmine.createSpy('success');
+              deferred.promise.then(handler);
+              deferred.resolve();
+              scope.$digest();
+              expect(scope.response3).toBe('Ontario');
+             
+        });
+        it('should have country data', function() {
+              var handler = jasmine.createSpy('success');
+              deferred.promise.then(handler);
+              deferred.resolve();
+              scope.$digest();
+              expect(scope.response4[0]).toBe('Mexico');
+             
+        });
+        it('should set Route.current to US', function() {
+              expect(scope.current).toBe('US');
+        });
 
-              // set up a deferred
-              var deferred = q.defer();
-              // get promise reference
-              var promise = deferred.promise;
 
-              // set up promise resolve callback
-              promise.then(function (response2) {
-                data1 = response2.data;
-              });
+    });
+    
+});
 
-              gC().then(function(response2) {
-                deferred.resolve(response2)
-              });
-              // force `$digest` to resolve/reject deferreds
-             rootScope.$digest();
-             httpBackend.flush();
-              // make your actual test
-              //expect(gC(data).then).toBeDefined();
-              expect(scope.response2[0]).toBe('Washington');
-              httpBackend.verifyNoOutstandingRequest();
+describe("myApp", function() {
+    beforeEach(module('myApp'));
+    describe('countriesCntrl', function() {
+        var ctrl, scope, jsonDataPromise, deferred;
+        beforeEach(inject(function($controller, $rootScope, $q, jsonData) {
+            
+            scope = $rootScope.$new();
+            deferred = $q.defer();
+            jsonDataPromise = $q.when({
+                      data: {
+                      geonames: ['Panama']
+                      }
+                });
+            
 
-        })
+            ctrl = $controller('countriesCntrl', {
+                $scope : scope,
+                jsonData: function()  { return jsonDataPromise }
+               
+            });
+            
+            
+        }));                
+        
+
+        it('should have country data', function() {
+              var handler = jasmine.createSpy('success');
+              deferred.promise.then(handler);
+              deferred.resolve();
+              scope.$digest();
+              expect(scope.countries[0]).toBe('Panama');
+              
+             
+        });
     });
 });
 
 
-  
+
+
+// describe("myApp", function() {
+//     beforeEach(module('myApp'));
+//     describe('countryCntrl', function() {
+//         var ctrl, scope, getCountryPromise;
+//         beforeEach(inject(function($controller, $rootScope, $q, getCountry) {
+            
+// A            scope = $rootScope.$new();
+//             scope.response2 = 'before';
+
+// B            getCountryPromise = $q.when({
+//                       data: {
+//                       geonames: ['Washington']
+//                       }
+//                 });
+
+// C            ctrl = $controller('countryCntrl', {
+//                 $scope : scope,
+// D                getCountry: function()  { return getCountryPromise; }
+
+//             });
+            
+            
+//         }));                
+        
+
+//         it('should have country data', function() {
+            
+// E            getCountryPromise.then(
+// F              function(){
+// F2              expect(scope.response2).toBe('Washington');
+//               expect(ctrl.something).toBe('controller variable');
+//             }
+//               );
+
+//         })
+//     });
+// });
+
+
+
